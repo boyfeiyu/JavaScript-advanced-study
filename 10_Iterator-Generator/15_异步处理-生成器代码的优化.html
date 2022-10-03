@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // 模拟网络请求， url->promise
+      function requestData(url) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve(url)
+          }, 1000)
+        })
+      }
+      function* getData() {
+        const res1 = yield requestData('first')
+        console.log(res1)
+        const res2 = yield requestData(res1 + ' senond')
+        console.log(res2)
+        const res3 = yield requestData(res2 + ' third')
+        console.log(res3)
+      }
+
+      // 自动化执行生成器函数
+      function execGenFn(genFn) {
+        // 获取generator
+        const generator = genFn()
+        // 定义递归函数
+        function exec(res) {
+          const result = generator.next(res)
+          console.log(result)
+          if (result.done) return
+          result.value.then((res) => exec(res))
+        }
+        exec()
+      }
+      execGenFn(getData)
+    </script>
+  </body>
+</html>

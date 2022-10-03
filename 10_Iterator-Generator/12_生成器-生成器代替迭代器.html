@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // 1 对之前代码进行重构，使用生成器函数
+      const names = ["abc", "cba", "nba"];
+      const nums = [100, 888, 1234, 2];
+
+      function* createArrayIterator(arr) {
+        for (let i = 0; i < arr.length; i++) {
+          yield arr[i];
+        }
+      }
+
+      const namesIterator = createArrayIterator(names);
+      console.log(namesIterator.next());
+      console.log(namesIterator.next());
+      console.log(namesIterator.next());
+      console.log(namesIterator.next());
+
+      // 2 yield 替换类中的实现
+      class Person {
+        constructor(name, age, height, friends) {
+          this.name = name;
+          this.age = age;
+          this.height = height;
+          this.friends = friends;
+        }
+
+        *[Symbol.iterator]() {
+          for (let i = 0; i < this.friends.length; i++) {
+            yield this.friends[i];
+          }
+        }
+      }
+      const p1 = new Person("why", 18, 1.88, ["jack", "tom", "duck"]);
+      const p2 = new Person("hebei", 24, 1.88, ["jack", "xiaohong", "duck"]);
+      for (const item of p1) {
+        console.log(item);
+      }
+
+      // 3 生成器[3,9)
+      function* createRangeGenerator(start, end) {
+        for (let i = start; i < end; i++) {
+          yield i;
+        }
+      }
+
+      const rangeGen = createRangeGenerator(3, 9);
+      console.log(rangeGen.next().value);
+      console.log(rangeGen.next().value);
+      console.log(rangeGen.next().value);
+      console.log(rangeGen.next().value);
+      console.log(rangeGen.next().value);
+      console.log(rangeGen.next().value);
+    </script>
+  </body>
+</html>

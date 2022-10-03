@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="app">app</div>
+    <div class="title">title</div>
+    <div class="nav">nav</div>
+    <div class="product">product</div>
+
+    <!-- 1 加上defer之后，js下载和执行不会影响后面DOM Tree的构建 -->
+
+    <script src="./js/test.js" defer></script>
+    <!--  4 derfer 保证顺序 -->
+    <!-- defer可以提高页面性能，并且推荐放到head中 -->
+    <script>
+      // 3 defer代码在这个事件之前执行
+      window.addEventListener('DOMContentLoaded', () => {
+        console.log('DOMContentLoaded')
+      })
+    </script>
+    <h1>hahaha</h1>
+  </body>
+</html>

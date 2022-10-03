@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 数字*2
+      function double(num) {
+        return num * 2
+      }
+      // 数字**2
+      function pow(num) {
+        return num ** 2
+      }
+      // 组合函数
+      function composeFn(...fns) {
+        // 边界判断(edge case)
+        if (fns.length <= 0) return
+        for (let i = 0; i < fns.length; i++) {
+          if (typeof fns[i] !== 'function') {
+            throw new Error(`position ${i} must be function`)
+          }
+        }
+        // 返回的新函数
+        return function (...args) {
+          let res = fns[0].apply(this, args)
+          for (let i = 1; i < fns.length; i++) {
+            res = fns[i].apply(this, [res])
+          }
+          return res
+        }
+      }
+
+      var newFn = composeFn(double, pow)
+      console.log(newFn(100))
+    </script>
+  </body>
+</html>

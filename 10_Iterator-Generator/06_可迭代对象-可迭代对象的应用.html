@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // 1 用在特定语法上for...of
+      // 展开语法
+      // yield
+      // 解构赋值
+      const names = ["abc", "cba", "nba"];
+      const info = {
+        name: "feiyu",
+        age: 18,
+        height: 1.88,
+        [Symbol.iterator]() {
+          const keys = Object.keys(info);
+          let index = 0;
+          return {
+            next: () => {
+              if (index < keys.length) {
+                return { done: false, value: info[keys[index++]] };
+              } else {
+                return { done: true };
+              }
+            },
+          };
+        },
+      };
+      function foo(arg1, arg2, arg3) {
+        console.log(arg1, arg2, arg3);
+      }
+      foo(...info);
+
+      // 2 一些类的构造方法，也是传入的可迭代对象
+      // new Map();
+      // new Set();
+      // new Set();
+      // new WeakSet();
+
+      // // 3 一些常用的方法
+      // Promise.all(pSet).then((res) => {
+      //   console.log(res);
+      // });
+
+      // function bar() {
+      //   const arr = Array.from(arguments);
+      // }
+    </script>
+  </body>
+</html>

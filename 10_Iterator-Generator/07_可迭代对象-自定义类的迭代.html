@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      class Person {
+        constructor(name, age, height, friends) {
+          this.name = name;
+          this.age = age;
+          this.height = height;
+          this.friends = friends;
+        }
+
+        [Symbol.iterator]() {
+          let index = 0;
+          const iterator = {
+            next: () => {
+              if (index < this.friends.length) {
+                return {
+                  done: false,
+                  value: this.friends[index++],
+                };
+              } else {
+                return {
+                  done: true,
+                };
+              }
+            },
+          };
+          return iterator;
+        }
+      }
+
+      const p1 = new Person("why", 18, 1.88, ["jack", "tom", "duck"]);
+      const p2 = new Person("hebei", 24, 1.88, ["jack", "xiaohong", "duck"]);
+
+      for (const item of p1) {
+        console.log(item);
+      }
+      for (key in p1) {
+        console.log(p1[key]);
+      }
+      // Object.entries   for key in p1
+    </script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      function* foo(name1) {
+        console.log("内部代码执行:1111", name1);
+        console.log("内部代码执行:2222", name1);
+        const name2 = yield "aaa";
+        console.log("内部代码执行:3333", name2);
+        console.log("内部代码执行:4444", name2);
+        console.log("内部代码执行:5555", name2);
+        const name3 = yield "bbb";
+        console.log("内部代码执行:6666", name3);
+        console.log("内部代码执行:77777", name3);
+        const name4 = yield "ccc";
+        console.log("最后一次执行", name4);
+        return undefined;
+      }
+
+      const generator = foo("next1");
+
+      // 提前return
+      // console.log(generator.next());
+      // console.log(generator.return("next2"));
+      // console.log("--------------");
+      // console.log(generator.next("next3"));
+      // console.log(generator.next("next4"));
+      // console.log(generator.next("next5"));
+
+      // 抛出异常
+      console.log(generator.next());
+      console.log(generator.throw(new Error("next2 throw error")));
+      console.log("--------------");
+      console.log(generator.next("next3"));
+      console.log(generator.next("next4"));
+      console.log(generator.next("next5"));
+    </script>
+  </body>
+</html>

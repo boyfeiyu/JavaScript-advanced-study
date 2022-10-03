@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function foo(a, b, c) {
+        console.log('foo执行了')
+      }
+
+      var bar = function (m, n) {
+        console.log('bar执行了')
+      }
+      // 自定义属性
+      foo.address = '西农'
+      console.log(foo.address)
+
+      // 默认属性
+      // 1 name属性
+      console.log(foo.name) // foo
+      console.log(bar.name) // bar
+
+      // 将两个函数放到数组中
+      var funs = [foo, bar]
+
+      for (var fn of funs) {
+        if (fn.name === 'foo') {
+          fn()
+        }
+      }
+
+      // 2 length 属性: 参数的个数(本来应该接收的个数)
+      for (var fn of funs) {
+        console.log(fn.name, fn.length)
+      }
+
+      // 额外补充
+      function demo(...args) {}
+      demo('abc', 'cba', 'nba')
+
+      // 默认参数和rest参数不会算在length里
+      function test(m, n = 20, ...args) {}
+
+      console.log(test.length)
+    </script>
+  </body>
+</html>

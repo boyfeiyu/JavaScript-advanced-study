@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function foo(a, b) {
+        // arguments 类数组(array-like)对象
+        // // 1 默认用法
+        // console.log(arguments)
+        // console.log(arguments[0])
+        // for (var i = 1; i < arguments.length; i++) {
+        //   console.log(arguments[i])
+        // }
+        // for (var arg of arguments) {
+        //   console.log(arg)
+        // }
+        // 2 需求获取所有参数中的偶数
+        // arguments中没有filter
+        // arguments转数组
+        // 2.1 转数组方式1
+        // var newArguments = []
+        // for (var arg of arguments) {
+        //   newArguments.push(arg)
+        // }
+        // console.log(newArguments)
+        // 2.2 ES6中方式
+        // var newArgs1 = Array.from(arguments)
+        // console.log(newArgs1)
+        // var newArgs2 = [...arguments]
+        // console.log(newArgs1)
+        // 2.3 将arguments转成数组方式二：调用slice方法
+        var newArgs1 = [].slice.apply(arguments)
+        var newArgs2 = Array.prototype.slice.apply(arguments)
+        console.log(newArgs1)
+        console.log(newArgs2)
+      }
+      foo(1, 2, 3, 4)
+    </script>
+  </body>
+</html>

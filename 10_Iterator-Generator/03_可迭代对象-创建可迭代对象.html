@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // 将infos变成一个可迭代对象
+      // 必须实现一个特定的还是
+      // 这个函数需要返回一个迭代器
+      const infos = {
+        friends: ["feiyu", "xiaoshuai", "jack"],
+        [Symbol.iterator]: function () {
+          let index = 0;
+          const infosIterator = {
+            next: function () {
+              // done: Boolean
+              // balue: 具体值/ undefined
+              if (index < infos.friends.length) {
+                return {
+                  done: false,
+                  value: infos.friends[index++],
+                };
+              } else {
+                return {
+                  done: true,
+                };
+              }
+            },
+          };
+          return infosIterator;
+        },
+      };
+
+      // const iterator = infos[Symbol.iterator]();
+      // console.log(iterator.next());
+      // console.log(iterator.next());
+      // console.log(iterator.next());
+      // console.log(iterator.next());
+      // console.log(iterator.next());
+
+      // 可迭代对象可以进行 for of 操作
+      for (const i of infos) {
+        console.log(i);
+      }
+
+      // 可迭代对象必有[Symbol.iterator]函数
+      const students = ["aaa", "bbb", "ccc"];
+      let stuIterator = students[Symbol.iterator]();
+      console.log(stuIterator.next());
+      console.log(stuIterator.next());
+      console.log(stuIterator.next());
+      console.log(stuIterator.next());
+    </script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // 生成器函数:
+      // 1 function后面会跟上符号*
+      // 2 代码的执行可以被yield控制
+      // 3 生成器函数默认在执行时，返回一个生成器对象
+      //   要向执行函数内部的代码，需要生成器对象，调用他的next操作
+      //   当遇到yield就会中断执行
+
+      // 定义了一个生成器函数
+      function* foo(name1) {
+        console.log("内部代码执行:1111", name1);
+        console.log("内部代码执行:2222", name1);
+        const name2 = yield "aaa";
+        console.log("内部代码执行:3333", name2);
+        console.log("内部代码执行:4444", name2);
+        console.log("内部代码执行:5555", name2);
+        const name3 = yield "bbb";
+        console.log("内部代码执行:6666", name3);
+        console.log("内部代码执行:77777", name3);
+        yield "ccc";
+        return undefined;
+      }
+
+      // 调用了一个生成器函数，返回生成器对象
+      // const generator = foo();
+      // console.log(generator.next());
+      // console.log(generator.next());
+      // console.log(generator.next());
+      // console.log(generator.next());
+      // console.log(generator.next());
+
+      // 在中间直接return 后面的不会被执行{value:'bbb', done:true}
+
+      // 传递参数
+      const generator = foo("next1");
+      console.log(generator.next());
+      console.log(generator.next("next2"));
+      console.log(generator.next("next3"));
+      console.log(generator.next("next4"));
+    </script>
+  </body>
+</html>
